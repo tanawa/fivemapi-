@@ -1,0 +1,31 @@
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+<script type="text/javascript">
+	var firebaseConfig = {
+    	apiKey: "AIzaSyCNlpUKjqLltEvYwT5HMvWzCE17aUQduLM",
+    	authDomain: "fivem-2bee4.firebaseapp.com",
+    	databaseURL: "https://fivem-2bee4-default-rtdb.asia-southeast1.firebasedatabase.app",
+    	projectId: "fivem-2bee4",
+    	storageBucket: "fivem-2bee4.appspot.com",
+    	messagingSenderId: "367216217891",
+    	appId: "1:367216217891:web:1a6e334cd032e95e3b0696",
+    	measurementId: "G-6Q0T35WH5B"
+  	};
+  
+  	firebase.initializeApp(firebaseConfig);
+  	firebase.analytics();
+  	var database = new firebase.database()
+  	parameter = window.location.search.split("&")
+  	if(parameter[0] == "?delete"){
+  		var ref = database.ref("add_inventory/"+parameter[1])
+  		ref.remove()
+  	}else if(parameter[0] =="?search"){
+  		var ref = database.ref("add_inventory/"+parameter[1])
+  		ref.once("value",(snapshot)=>{
+  			document.write("["+snapshot.val()+"]")
+  		})
+  	}
+  	console.log(parameter)
+</script>
